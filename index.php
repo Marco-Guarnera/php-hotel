@@ -2,8 +2,6 @@
 
 // Fase di preparazione
 
-// Variabili
-
 // Struttura dati
 
 $hotels = [
@@ -48,6 +46,10 @@ $hotels = [
     ]
 ];
 
+// Variabili
+
+$object_keys = array_keys($hotels[0]);
+
 // Fase di raccolta dati
 // Fase di elaborazione
 
@@ -75,7 +77,29 @@ $hotels = [
         <h1 class="text-center">PHP Hotel</h1>
     </header>
     <!-- Main -->
-    <main></main>
+    <main>
+        <!-- Table -->
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <?php foreach ($object_keys as $key) { ?>
+                        <th><?= $key ?></th>
+                    <?php } ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($hotels as $item) { ?>
+                    <tr>
+                        <td><?= $item['name'] ?></td>
+                        <td><?= $item['description'] ?></td>
+                        <td><?= $item['parking'] ?></td>
+                        <td><?= $item['average'] ?></td>
+                        <td><?= $item['distance_to_center'] ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </main>
 </body>
 
 </html>
