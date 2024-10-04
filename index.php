@@ -78,27 +78,29 @@ $object_keys = array_keys($hotels[0]);
     </header>
     <!-- Main -->
     <main>
-        <!-- Table -->
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <?php foreach ($object_keys as $key) { ?>
-                        <th><?= $key ?></th>
-                    <?php } ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($hotels as $item) { ?>
+        <div class="container-fluid">
+            <!-- Table -->
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td><?= $item['name'] ?></td>
-                        <td><?= $item['description'] ?></td>
-                        <td><?= $item['parking'] ?></td>
-                        <td><?= $item['average'] ?></td>
-                        <td><?= $item['distance_to_center'] ?></td>
+                        <?php foreach ($object_keys as $key) { ?>
+                            <th><?= str_replace('_', ' ', ucfirst($key)) ?></th>
+                        <?php } ?>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($hotels as $item) { ?>
+                        <tr>
+                            <td><?= $item['name'] ?></td>
+                            <td><?= $item['description'] ?></td>
+                            <td><?= $item['parking'] ? 'Yes' : 'No' ?></td>
+                            <td><?= $item['average'] . '/5' ?></td>
+                            <td><?= "{$item['distance_to_center']} km" ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
 
