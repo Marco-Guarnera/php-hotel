@@ -46,12 +46,32 @@ $hotels = [
     ]
 ];
 
-// Variabili
-
 $object_keys = array_keys($hotels[0]);
+
+$filtered_array = [];
 
 // Fase di raccolta dati
 // Fase di elaborazione
+
+if (isset($_GET['parking']) && $_GET['parking'] === 'on') {
+    foreach ($hotels as $item) {
+        if ($item['parking'] === true) {
+            array_push($filtered_array, $item);
+        }
+    }
+} else {
+    $filtered_array = $hotels;
+}
+
+if (isset($_GET['average']) && $_GET['average'] !== 'Average') {
+    $temp_array = [];
+    foreach ($filtered_array as $item) {
+        if ($item['average'] == $_GET['average']) {
+            array_push($temp_array, $item);
+        }
+    }
+    $filtered_array = $temp_array;
+}
 
 ?>
 
@@ -79,6 +99,23 @@ $object_keys = array_keys($hotels[0]);
     <!-- Main -->
     <main>
         <div class="container-fluid">
+            <!-- Form -->
+            <form action="index.php" method="get" class="d-flex align-items-center gap-1">
+                <div class="form-check me-1">
+                    <input type="checkbox" id="parking" class="form-check-input" name="parking">
+                    <label for="parking" class="form-check-label">Parking</label>
+                </div>
+                <select class="form-select w-25" name="average">
+                    <option selected>Average</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </form>
             <!-- Table -->
             <table class="table table-hover">
                 <thead>
@@ -89,7 +126,7 @@ $object_keys = array_keys($hotels[0]);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($hotels as $item) { ?>
+                    <?php foreach ($filtered_array as $item) { ?>
                         <tr>
                             <td><?= $item['name'] ?></td>
                             <td><?= $item['description'] ?></td>
